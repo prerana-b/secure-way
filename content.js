@@ -11,6 +11,7 @@ console.log(url_site)
     .then(data => checker(data));
 
 function checker(data){
+    console.log(data)
     if (data.positives > 0){
         chrome.runtime.sendMessage({
             "message": "PHISHING"
