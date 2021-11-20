@@ -11,7 +11,7 @@
           "matches": [
             "<all_urls>"
           ],
-          "js": ["jquery-3.1.1.min.js","content.js"]
+          "js": ["jquery-3.1.1.min.js","content.js", "popup.js"]
         }
      ],
     "browser_action":{
@@ -20,5 +20,5 @@
     "permissions":[
         "bookmarks", "tabs"
     ],
-    "content_security_policy": "script-src 'self' https://example.com; object-src 'self'"
+    "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net; object-src 'self'"
 }

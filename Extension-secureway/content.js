@@ -2,6 +2,7 @@ var testdata;
 var prediction;
 
 function predict(data,weight){
+    console.log("Hello");
     var f = 0;
     weight = [3.33346292e-01,-1.11200396e-01,-7.77821806e-01,1.11058590e-01,3.89430647e-01,1.99992062e+00,4.44366975e-01,-2.77951957e-01,-6.00531647e-05,3.33200243e-01,2.66644002e+00,6.66735991e-01,5.55496098e-01,5.57022408e-02,2.22225591e-01,-1.66678858e-01];
     for(var j=0;j<data.length;j++) {
@@ -11,6 +12,7 @@ function predict(data,weight){
 }
 
 function isIPInURL(){
+    console.log("Hello");
     var reg =/\d{1,3}[\.]{1}\d{1,3}[\.]{1}\d{1,3}[\.]{1}\d{1,3}/;
     var url = window.location.href
     if(reg.exec(url)==null){
@@ -126,6 +128,7 @@ function isFaviconDomainUnidentical(){
 }
 
 function isIllegalHttpsURL(){
+    console.log("Hello");
     var srch1 ="//";   
     var srch2 = "https";   
     var url = window.location.href; 
@@ -286,6 +289,12 @@ function getIdenticalDomainCount(tag){
 testdata = [isIPInURL(),isLongURL(),isTinyURL(),isAlphaNumericURL(),isRedirectingURL(),isHypenURL(),isMultiDomainURL(),isFaviconDomainUnidentical(),isIllegalHttpsURL(),isImgFromDifferentDomain(),isAnchorFromDifferentDomain(),isScLnkFromDifferentDomain(),isFormActionInvalid(),isMailToAvailable(),isStatusBarTampered(),isIframePresent()];
 
 prediction = predict(testdata);
+
+console.log(prediction);
+
+document.getElementById("resultid").innerHTML = "Help"
+
+
 
 chrome.extension.sendRequest(prediction);
 

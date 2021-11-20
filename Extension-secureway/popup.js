@@ -32,3 +32,4 @@
 // chrome.storage.sync.get("level", function (val) {
 //     activate("l" + val.level, false);
 // });
+
