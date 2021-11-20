@@ -292,7 +292,6 @@ prediction = predict(testdata);
 
 console.log(prediction);
 
-document.getElementById("resultid").innerHTML = "Help"
 
 
 
