@@ -19,5 +19,6 @@
     },
     "permissions":[
         "bookmarks", "tabs"
-    ]
+    ],
+    "content_security_policy": "script-src 'self' https://example.com; object-src 'self'"
 }

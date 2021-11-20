@@ -5,17 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
         crossorigin="anonymous"></script>
@@ -34,44 +23,39 @@
             <p class="pt-2 h-5"><b>Secure-Way</b></p>
         </div>
         <div style="background-color: azure;" class="container">
-            <p class="display-4">Choose the level of Security</p>
+            <p class="display-4">Preferences: </p>
             <form class="justify-content-center">
                 <div class="form-check">
-                    <input class="form-check-input " type="radio" name="Level" id="Low" value="option1">
-                    <label class="form-check-label" for="Low">Low-level</label>
+                    <input class="form-check-input " type="checkbox" name="Level" id="Low" value="option1">
+                    <label class="form-check-label" for="Low">Check Phishing Websites</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="Level" id="Medium" value="option2">
-                    <label class="form-check-label" for="Medium">Medium-level</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="Level" id="High" value="option3">
-                    <label class="form-check-label" for="High">High-level</label>
+                    <input class="form-check-input" type="checkbox" name="Level" id="Medium" value="option2">
+                    <label class="form-check-label" for="Medium">Check Download Files</label>
                 </div>
                 <button type="submit" class="btn btn-primary my-3 w-25">Save</button>
             </form>
         </div>
     </div>
+    <div class="container">
+        <div class="d-flex align-items-center bg-white border-bottom container">
+            <img src="./images/firefox-icon-48.png" alt="">
+            <p class="pt-2 h-5"><b>Secure-Way</b></p>
+        </div>
+        <div style="background-color: azure;" class="container">
+            <p id="demo"></p>
+        </div>
+    </div>
 </body>
-
+<script>
+    document.getElementById("demo").innerHTML = "WARNING! Phishing Detected";
+    chrome.extension.onRequest.addListener(function(prediction){
+    if (prediction == 1){
+        document.getElementById("demo").innerHTML = "WARNING! Phishing Detected";
+    }
+    else if (prediction == -1){
+        document.getElementById("demo").innerHTML = "Site is safe to access";
+    }
+});
+</script>
 </html>
-
-<!-- <p class="">Choose your paranoia level</p>
-<table>
-    <tr>
-        <td id="l0" class="lactive"><img src="img/level_0.png"></td>
-        <td id="l1"><img src="img/level_1.png"></td>
-        <td id="l2"><img src="img/level_2.png"></td>
-        <td id="l3"><img src="img/level_3.png"></td>
-        <td id="l4"><img src="img/level_4.png"></td>
-    </tr>
-    <tr>
-        <td class="desc">Off</td>
-        <td class="desc">Low</td>
-        <td class="desc">Medium</td>
-        <td class="desc">High</td>
-        <td class="desc">Tin Foil Hat</td>
-    </tr>
-
-</table> -->
-<!-- <script src="popup.js" type="text/javascript"></script> -->
