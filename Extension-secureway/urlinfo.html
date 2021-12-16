@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>URL Information</title>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+		<script src="jquery-3.1.1.min.js"></script>
+		<!-- <script src="bootstrap.min.js"></script> -->
+		<script src="urlinfo.js"></script>
+        <link rel="preconnect" href="//ssl.google-analytics.com">
+        <link rel="preconnect" href="//sb-ssl.google.com">
+        <link rel="preconnect" href="//www.sslchecker.com">
+	</head>
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="60" id="bodyID">
+    
+	<div class="container" id="container">
+        <div id="inputPane" class="col-md-6">
+            <div class="tab-content">
+                <div id="reverseIPlookup" class="tab-pane fade">
+                    <br><br>
+                    <h1>Reverse IP Lookup</h1>
+                    <p>Does a reverse ip lookup of the </p>
+                    <br>
+                    <div id="revIPDiv">
+                        <div class="info"></div><br>
+                        <button for="revIPinput" id="revIPsubmit" type="button" value="Scan" data-loading-text="Scanning.." class="btn btn-primary"  data-toggle="modal" data-target=".bs-example-modal-sm">Lookup! </button> 
+                    </div>
+                    <br><br>
+                    <div id="revIPpre">
+                    </div>
+                </div>
+                
+                <div id="httpHeadersLookup" class="tab-pane fade">
+                    <br><br>
+                    <p>Enter a domain or an URL to lookup the HTTP Headers.</p>
+                    <br>
+                    <div id="httpdiv">
+                        <div class="form-group">
+                            <div class="icon-addon addon-md">
+                                <input id="httpInput" size="82" type="url" name="url" placeholder="https://example.com" autofocus style="padding: 5px" pattern="[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+.*" required title="Input should be a  valid URL. For example: https://example.com/go/download.html" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="info"></div><br>
+                        <button for="httpInput" id="httpSubmit" type="button" value="Lookup!" data-loading-text="Looking up.." class="btn btn-primary"  data-toggle="modal" data-target=".bs-example-modal-sm">Lookup! </button> 
+                    </div>
+                    <br><br>
+                    <div id="httpPre">
+                    </div>
+                </div>
+                <div id="sslChecker" class="tab-pane fade">
+                    <br><br>
+                    <p>The SSL Certificate Checker will help you to diagnose problems with website's SSL certificate. We can determine whether the certificate is correctly installed, valid, trusted, and whether or not it is supported by major web browsers. To check the website's SSL certificate errors, enter the website in the box below and click the Check SSL button.</p>
+                    <br>
+                    <div id="sslURLdiv">
+                        <div class="form-group">
+                            <div class="icon-addon addon-md">
+                                <input id="sslURLinput" size="82" type="url" name="url" placeholder="https://example.com" autofocus style="padding: 5px" pattern="[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+.*" required title="Input should be a  valid URL. For example: https://example.com/go/download.html" class="form-control" />
+                            </div>
+                        </div>
+            <!--			<div id="info">URLs<span id="max-urls"> allowed </span>: <span id="linesUsed">1</span></div><br>-->
+                        <div class="info"></div><br>
+                        <button for="sslURLinput" id="sslURLsubmit" type="button" value="Scan" data-loading-text="Scanning.." class="btn btn-primary"  data-toggle="modal" data-target=".bs-example-modal-sm">Check SSL </button>
+                    </div>
+                    <br><br>
+                    <div>
+                        <table class="table" id="sslTable"></table>
+                    </div>
+                </div>                
+                <div id="extractedPageLinks" class="tab-pane fade">
+                    <br><br>
+                    <p>Enter a domain or an URL to parse and extract the URLs from the website. </p>
+                    <br>
+                    <div id="whoisdiv">
+                        <div class="form-group">
+                            <div class="icon-addon addon-md">
+                                <input id="extractedPageLinksInput" size="82" type="url" name="url" placeholder="https://example.com" autofocus style="padding: 5px" pattern="[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+.*" required title="Input should be a  valid URL. For example: https://example.com/go/download.html" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="info"></div><br>
+                        <button for="extractedPageLinksInput" id="extractedPageLinksSubmit" type="button" value="Lookup!" data-loading-text="Extracting.." class="btn btn-primary"  data-toggle="modal" data-target=".bs-example-modal-sm">Lookup! </button> 
+                    </div>
+                    <br><br>
+                    <div id="extractedPageLinksPre">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row" id="scanResultWindow" style="display:none;">
+			<nav class="col-sm-2" id="myScrollspy" style="float:right">
+			  <ul class="nav nav-pills nav-stacked">
+				<li id="navHeaders"><a href="#HTTP_headers">HTTP Headers</a></li>
+				<li id="navSD"><a href="#subdomains">Subdomains</a></li>
+                <li id="navRDNS"><a href="#reverseDNS">Reverse DNS Lookup</a></li>
+                <li id="navRIP"><a href="#reverseIP">Reverse IP Lookup</a></li>
+				<li id="navExtractURLs"><a href="#extractedURLs">Extracted URLs</a></li>
+              </ul>
+			</nav>
+			<div class="col-sm-10" id="scanReport">
+                <div id="HTTP_headers">  
+					<span id="httpHeaders"></span><br>
+				</div>
+				<div id="subdomains">    
+					<span id="vtDomainSubdomains"></span><br>
+				</div>
+                <div id="dnsLookup">
+					<span id="dnsLookupwrap"></span><br>
+				</div>
+                <div id="reverseDNS">
+					<span id="reverseDNSwrap"></span><br>
+				</div>
+                <div id="reverseIP">
+					<span id="reverseIPwrap"></span><br>
+				</div>
+				<div id="extractedURLs"> 
+					<span id="extractedURLsWrap"></span><br>
+				</div>
+			</div>
+  		</div>
+        
+	</div>
+</body>
+</html>
