@@ -10,11 +10,13 @@ function predict(data,weight){
     }
     return f > 0 ? 1 : -1;
 }
+var urltest = window.location.href;
+console.log(urltest);
 
-function isIPInURL(){
+function isIPInURL(url){
     console.log("Hello");
     var reg =/\d{1,3}[\.]{1}\d{1,3}[\.]{1}\d{1,3}[\.]{1}\d{1,3}/;
-    var url = window.location.href
+    
     if(reg.exec(url)==null){
         console.log("NP");
         return -1;
@@ -25,8 +27,8 @@ function isIPInURL(){
     }
 }
 
-function isLongURL(){
-    var url = window.location.href;    
+function isLongURL(url){
+    ////var url = window.location.href;    
     if(url.length<54){
         console.log("NP");
         return -1;
@@ -40,8 +42,8 @@ function isLongURL(){
         return 1;
     }
 }
-function isTinyURL(){
-    var url = window.location.href;    
+function isTinyURL(url){
+    ////var url = window.location.href;    
     if(url.length>20){
         console.log("NP");
         return -1;
@@ -51,9 +53,9 @@ function isTinyURL(){
         return 1;
     }
 }
-function isAlphaNumericURL(){
+function isAlphaNumericURL(url){
     var search ="@";
-    var url = window.location.href; 
+    //var url = window.location.href; 
     if(url.match(search)==null){
         console.log("NP");
         return -1;
@@ -63,11 +65,11 @@ function isAlphaNumericURL(){
         return 1;
     }
 }
-function isRedirectingURL(){
+function isRedirectingURL(url){
     var reg1 = /^http:/
     var reg2 = /^https:/
     var srch ="//";
-    var url = window.location.href; 
+    //var url = window.location.href; 
     if(url.search(srch)==5 && reg1.exec(url)!=null && (url.substring(7)).match(srch)==null){
         console.log("NP");
         return -1;
@@ -81,10 +83,10 @@ function isRedirectingURL(){
         return 1;
     }
 }
-function isHypenURL(){
+function isHypenURL(url){
     var reg = /[a-zA-Z]\//;
     var srch ="-";
-    var url = window.location.href; 
+    //var url = window.location.href; 
     if(((url.substring(0,url.search(reg)+1)).match(srch))==null){
         console.log("NP");
         return -1;
@@ -94,10 +96,10 @@ function isHypenURL(){
         return 1;
     }
 }
-function isMultiDomainURL(){
+function isMultiDomainURL(url){
     var reg = /[a-zA-Z]\//;
     var srch ="-";
-    var url = window.location.href; 
+    //var url = window.location.href; 
     if((url.substring(0,url.search(reg)+1)).split('.').length < 5){
         console.log("NP");
         return -1;
@@ -107,9 +109,9 @@ function isMultiDomainURL(){
         return 1;
     }
 }
-function isFaviconDomainUnidentical(){
+function isFaviconDomainUnidentical(url){
     var reg = /[a-zA-Z]\//;
-    var url = window.location.href; 
+    //var url = window.location.href; 
     if(document.querySelectorAll("link[rel*='shortcut icon']").length>0){            
         var faviconurl = document.querySelectorAll("link[rel*='shortcut icon']")[0].href;
         if((url.substring(0,url.search(reg)+1))==(faviconurl.substring(0,faviconurl.search(reg)+1))){
@@ -127,11 +129,11 @@ function isFaviconDomainUnidentical(){
     }
 }
 
-function isIllegalHttpsURL(){
-    console.log("Hello");
+function isIllegalHttpsURL(url){
+    console.log(url);
     var srch1 ="//";   
     var srch2 = "https";   
-    var url = window.location.href; 
+    //var url = window.location.href; 
     if(((url.substring(url.search(srch1))).match(srch2))==null){
         console.log("NP");
         return -1;
@@ -141,7 +143,7 @@ function isIllegalHttpsURL(){
         return 1;
     }
 }
-function isImgFromDifferentDomain(){
+function isImgFromDifferentDomain(url){
 	var totalCount = document.querySelectorAll("img").length
 	var identicalCount = getIdenticalDomainCount("img");
 	if(((totalCount-identicalCount)/totalCount)<0.22){
@@ -157,7 +159,7 @@ function isImgFromDifferentDomain(){
         return 1;
     }
 }
-function isAnchorFromDifferentDomain(){
+function isAnchorFromDifferentDomain(url){
 	var totalCount = document.querySelectorAll("a").length
 	var identicalCount = getIdenticalDomainCount("a");
 	if(((totalCount-identicalCount)/totalCount)<0.31){
@@ -173,7 +175,7 @@ function isAnchorFromDifferentDomain(){
         return 1;
     }
 }
-function isScLnkFromDifferentDomain(){
+function isScLnkFromDifferentDomain(url){
 	var totalCount = document.querySelectorAll("script").length + document.querySelectorAll("link").length
 	var identicalCount = getIdenticalDomainCount("script") + getIdenticalDomainCount("link");
 	if(((totalCount-identicalCount)/totalCount)<0.17){
@@ -190,7 +192,7 @@ function isScLnkFromDifferentDomain(){
     }
 }
 
-function isFormActionInvalid(){
+function isFormActionInvalid(url){
     var totalCount = document.querySelectorAll("form").length
 	var identicalCount = getIdenticalDomainCount("form");
 	if(document.querySelectorAll('form[action]').length<=0){
@@ -211,7 +213,7 @@ function isFormActionInvalid(){
     } 
 }
 
-function isMailToAvailable(){
+function isMailToAvailable(url){
     if(document.querySelectorAll('a[href^=mailto]').length<=0){
         console.log("NP");
         return -1;
@@ -222,7 +224,7 @@ function isMailToAvailable(){
     }
 }
 
-function isStatusBarTampered(){
+function isStatusBarTampered(url){
     if((document.querySelectorAll("a[onmouseover*='window.status']").length<=0) || (document.querySelectorAll("a[onclick*='location.href']").length<=0)){
         console.log("NP");
         return -1;
@@ -233,7 +235,7 @@ function isStatusBarTampered(){
     } 
 }
 
-function isIframePresent(){
+function isIframePresent(url){
     if(document.querySelectorAll('iframe').length<=0){
         console.log("NP");
         return -1;
@@ -248,7 +250,7 @@ function getIdenticalDomainCount(tag){
     var i;
 	var identicalCount=0;
 	var reg = /[a-zA-Z]\//;    
-    var url = window.location.href;
+    var url = urltest;
     var mainDomain = url.substring(0,url.search(reg)+1);    
     var nodeList = document.querySelectorAll(tag);
     if(tag=="img" || tag=="script"){
@@ -286,16 +288,20 @@ function getIdenticalDomainCount(tag){
     return identicalCount;
 } 
 
-testdata = [isIPInURL(),isLongURL(),isTinyURL(),isAlphaNumericURL(),isRedirectingURL(),isHypenURL(),isMultiDomainURL(),isFaviconDomainUnidentical(),isIllegalHttpsURL(),isImgFromDifferentDomain(),isAnchorFromDifferentDomain(),isScLnkFromDifferentDomain(),isFormActionInvalid(),isMailToAvailable(),isStatusBarTampered(),isIframePresent()];
+testdata = [isIPInURL(urltest),isLongURL(urltest),isTinyURL(urltest),isAlphaNumericURL(urltest),isRedirectingURL(urltest),isHypenURL(urltest),isMultiDomainURL(urltest),isFaviconDomainUnidentical(urltest),isIllegalHttpsURL(urltest),isImgFromDifferentDomain(urltest),isAnchorFromDifferentDomain(urltest),isScLnkFromDifferentDomain(urltest),isFormActionInvalid(urltest),isMailToAvailable(urltest),isStatusBarTampered(urltest),isIframePresent(urltest)];
 
 prediction = predict(testdata);
-
 console.log(prediction);
+function showPrediction() {
+    console.log(prediction);
+    return prediction;
+}
 
+exports.showPrediction = showPrediction;
+exports.isIllegalHttpsURL = isIllegalHttpsURL;
 
+//chrome.extension.sendRequest(prediction);
 
-
-chrome.extension.sendRequest(prediction);
 
 
 
