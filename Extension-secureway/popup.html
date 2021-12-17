@@ -25,26 +25,31 @@
         <div style="background-color: azure;" class="container">
             <div id="formid">
                 <p class="display-4">Preferences: </p>
-                <form class="justify-content-center" action="safe.html">
+                <form class="justify-content-center" action="popup.html">
                     <div class="form-check">
                         <input class="form-check-input " type="checkbox" name="Level" id="Low" value="option1">
                         <label class="form-check-label" for="Low">Check Phishing Websites</label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="Level" id="Medium" value="option2">
-                        <label class="form-check-label" for="Medium">Check Download Files</label>
-                    </div>
-                    <div id = "status">
+                    <!-- <div id = "status">
                     <button type="submit" id = "save" class="btn btn-primary my-3 w-25">Save</button>
-                  </div>
+                  </div> -->
                 </form>
             </div>
+            <!-- <div style="background-color: azure;" class="container"> Preferences Saved!</div>
+            <div style="background-color: azure;" class="container">
+                <p id="results">Click to edit preferences: </p>
+                <a href="./popup.html">Preferences</a>
+            </div> -->
+            <div style="background-color: azure;" class="container">
+                <p id="results">Checkout URL Information: </p>
+                <button type="submit" class="btn btn-primary" id="go-to-options">URL Information</button>
+                <!-- <a href="./urlinfo.html">URL Information</a> -->
+            </div>    
             <div id="resultid">
                 <p id="result"></p>
             </div>
         </div>
     </div>
     <script src="popup.js"></script>
-
   </body>
 </html>

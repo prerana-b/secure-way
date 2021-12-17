@@ -5,9 +5,6 @@
     "author": "Group 5: Prerana Bhasein, Kishu Jain, Anushree Krishania, Mohd. Hamza, Sarthak Khabiya",
 
     "version":"1.0",
-    "background":{
-        "scripts":["background.js"]
-    },
     "content_scripts": [
         {
           "matches": [
@@ -16,6 +13,7 @@
           "js": ["jquery-3.1.1.min.js","content.js", "popup.js"]
         }
      ],
+     
     "browser_action":{
         "default_popup":"popup.html"
     },
