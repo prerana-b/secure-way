@@ -284,128 +284,21 @@ function extractURLs(url, ref) {
     }    
 }
 
-/**
-* DNS Lookup
-*
-*/
-function dnsLookup (url) {
-    try {
-        $.ajax({
-            type: "GET",
-            url: "http://api.hackertarget.com/dnslookup/?q=" + url,
-            success: function(data){
-                if (data == "API count exceeded" || data == "") {
-                    //lookup limit reached
-                    $('#navDNS').remove();
-                    $('#dnsLookup').remove();
-                } else {
-                    var dnsLookupPane = document.createElement('fieldset');
-                    var dnsLookupL = document.createElement('legend');
-                    var pre = document.createElement('pre');
-                    pre.setAttribute('style', 'border:1px black');
-                    pre.innerText = data;
-                    dnsLookupL.innerText = "DNS Lookup";
-                    dnsLookupPane.appendChild(dnsLookupL);
-                    dnsLookupPane.appendChild(pre);
-                    document.getElementById('dnsLookupwrap').appendChild(dnsLookupPane);   
-                }
-            },
-            dataType: "text",
-            error: function() {
-                console.log("DNS Lookup: ", err);
-                $('#navDNS').remove();
-                $('#dnsLookup').remove();
-            }
-        });    
-    }
-    
-    catch (err) {
-        console.log("Error (DNS Lookup): ", err);
-    }
-}
-
-/**
-* Reverse DNS Lookup
-*
-*/
-function reverseDNS (url) {
-    try {
-        $.ajax({
-            type: "GET",
-            url: "https://api.hackertarget.com/reversedns/?q=" + url,
-            success: function(data){
-                console.log(data);
-                if (data == "API count exceeded" || data == "") {
-                    //lookup limit reached
-                    $('#navRDNS').remove();
-                    $('#reverseDNS').remove();
-                } else {
-                    var reverseDNSPane = document.createElement('fieldset');
-                    var reverseDNSL = document.createElement('legend');
-                    var pre = document.createElement('pre');
-                    pre.setAttribute('style', 'border:1px black');
-                    pre.innerText = data;
-                    reverseDNSL.innerText = "Reverse DNS Lookup";
-                    reverseDNSPane.appendChild(reverseDNSL);
-                    reverseDNSPane.appendChild(pre);
-                    document.getElementById('reverseDNSwrap').appendChild(reverseDNSPane);   
-                }
-            },
-            async: false,
-            dataType: "text",
-            error: function() {
-                console.log("Reverse DNS Lookup: ", err);
-                $('#navRDNS').remove();
-                $('#reverseDNS').remove();
-            }
-        });    
-    }
-    
-    catch (err) {
-        console.log("Error (Reverse DNS Lookup): ", err);
-    }
-}
-
-
-
-
 function startScanners (url) {
 	var getLatestReport = [];
     
 	getLatestReport = vt(url);
 
     revIP(url);
-    dnsLookup(url);
-    reverseDNS(url);
-    vtURLReport(url, getLatestReport[0], getLatestReport[1]);
-    vtDomainReport(url);
     httpHeaders(url);
-    gsb(url);
-    mcafee(url);
-	norton(url);
-	avg(url);
-	//trendMicroSSC(url);
-    wot(url);
     extractURLs(url);
-    screenshot(url);
-    webcache(url);
-    fortiguard(url);
-    urlvoid(url);
-	
-//    phishtank(url);
-//	vtFileScan();
-
 	$('#inputPane').hide();
     $('#adHolder').hide();
 	$('#scanResultWindow').show();
 	document.getElementById('container').style.cursor = 'auto';
 }
 
-//window.onload = function () {
-	
 	$(document).ready(function () {
-		
-        //jump to page path #fileLookup
         if (getUrlParameter('go') == 'fileLookup') {
             try {
                 ga('send', 'event', 'getUrlParameter', 'click', 'fileLookup', {transport: 'beacon'});    
@@ -416,8 +309,6 @@ function startScanners (url) {
             }
             $('#urlId').removeClass('active');
             $('#urlId a').attr('aria-expanded','false');
-            $('#whoisId').removeClass('active');
-            $('#whoisId a').attr('aria-expanded','false');
             $('#revIPId').removeClass('active');
             $('#revIPId a').attr('aria-expanded','false');
             $('#httpId').removeClass('active');
@@ -426,32 +317,23 @@ function startScanners (url) {
             $('#extractedId a').attr('aria-expanded','false');
             $('#sslId').removeClass('active');
             $('#sslId a').attr('aria-expanded','false');
-            
-            $('#fileId').addClass('active');
-            $('#fileId a').attr('aria-expanded','true');
-            
             $('#urlLookup').attr('class','tab-pane fade');
             $('#whoisLookup').attr('class','tab-pane fade');
             $('#reverseIPlookup').attr('class','tab-pane fade');
             $('#httpHeadersLookup').attr('class','tab-pane fade');
             $('#extractedPageLinks').attr('class','tab-pane fade');
             $('#sslChecker').attr('class','tab-pane fade');
-            $('#fileLookup').attr('class','tab-pane fade active in');
         }
         
-        //jump to page path #whoisLookup
         if (getUrlParameter('go') == 'whois') {
             try {
                 ga('send', 'event', 'getUrlParameter', 'click', 'Whois Lookup', {transport: 'beacon'});    
-            }
-            
+            }            
             catch (err) {
 				console.log("getUrlParameter(whoisLookup): ", err);
             }
             $('#urlId').removeClass('active');
             $('#urlId a').attr('aria-expanded','false');
-            $('#fileId').removeClass('active');
-            $('#fileId a').attr('aria-expanded','false');
             $('#revIPId').removeClass('active');
             $('#revIPId a').attr('aria-expanded','false');
             $('#httpId').removeClass('active');
@@ -459,21 +341,13 @@ function startScanners (url) {
             $('#extractedId').removeClass('active');
             $('#extractedId a').attr('aria-expanded','false');
             $('#sslId').removeClass('active');
-            $('#sslId a').attr('aria-expanded','false');
-            
-            $('#whoisId').addClass('active');
-            $('#whoisId a').attr('aria-expanded','true');
-            
+            $('#sslId a').attr('aria-expanded','false');            
             $('#urlLookup').attr('class','tab-pane fade');
-            $('#fileLookup').attr('class','tab-pane fade');
             $('#reverseIPlookup').attr('class','tab-pane fade');
             $('#httpHeadersLookup').attr('class','tab-pane fade');
             $('#extractedPageLinks').attr('class','tab-pane fade');
             $('#sslChecker').attr('class','tab-pane fade');
-            $('#whoisLookup').attr('class','tab-pane fade active in');
         }
-        
-        //jump to page path #reverseIPLookup
         if (getUrlParameter('go') == 'reverseIP') {
             try {
                 ga('send', 'event', 'getUrlParameter', 'click', 'Reverse IP Lookup', {transport: 'beacon'});    
@@ -484,8 +358,6 @@ function startScanners (url) {
             }
             $('#urlId').removeClass('active');
             $('#urlId a').attr('aria-expanded','false');
-            $('#fileId').removeClass('active');
-            $('#fileId a').attr('aria-expanded','false');
             $('#whoisId').removeClass('active');
             $('#whoisId a').attr('aria-expanded','false');
             $('#httpId').removeClass('active');
@@ -493,26 +365,19 @@ function startScanners (url) {
             $('#extractedId').removeClass('active');
             $('#extractedId a').attr('aria-expanded','false');
             $('#sslId').removeClass('active');
-            $('#sslId a').attr('aria-expanded','false');
-            
+            $('#sslId a').attr('aria-expanded','false');            
             $('#revIPId').addClass('active');
-            $('#revIPId a').attr('aria-expanded','true');
-            
+            $('#revIPId a').attr('aria-expanded','true');            
             $('#urlLookup').attr('class','tab-pane fade');
-            $('#fileLookup').attr('class','tab-pane fade');
-            $('#whoisLookup').attr('class','tab-pane fade');
             $('#httpHeadersLookup').attr('class','tab-pane fade');
             $('#extractedPageLinks').attr('class','tab-pane fade');
             $('#sslChecker').attr('class','tab-pane fade');
             $('#reverseIPlookup').attr('class','tab-pane fade active in');
-        }
-        
-        //jump to page path #sslChecker
+        }        
         if (getUrlParameter('go') == 'sslChecker') {
             try {
                 ga('send', 'event', 'getUrlParameter', 'click', 'sslChecker', {transport: 'beacon'});    
-            }
-            
+            }            
             catch (err) {
 				console.log("getUrlParameter(sslChecker): ", err);
             }
@@ -520,8 +385,6 @@ function startScanners (url) {
             $('#urlId a').attr('aria-expanded','false');
             $('#fileId').removeClass('active');
             $('#fileId a').attr('aria-expanded','false');
-            $('#whoisId').removeClass('active');
-            $('#whoisId a').attr('aria-expanded','false');
             $('#httpId').removeClass('active');
             $('#httpId a').attr('aria-expanded','false');
             $('#extractedId').removeClass('active');
@@ -534,7 +397,6 @@ function startScanners (url) {
             
             $('#urlLookup').attr('class','tab-pane fade');
             $('#fileLookup').attr('class','tab-pane fade');
-            $('#whoisLookup').attr('class','tab-pane fade');
             $('#httpHeadersLookup').attr('class','tab-pane fade');
             $('#extractedPageLinks').attr('class','tab-pane fade');
             $('#reverseIPlookup').attr('class','tab-pane fade');
@@ -565,7 +427,6 @@ function startScanners (url) {
                 
 
                 try {
-                    //URLVoid latest report
                     var reqV = new XMLHttpRequest();
                     reqV.open('GET', 'http://www.urlvoid.com/update-report/' + url, true);
                     reqV.send(null);    
@@ -586,80 +447,7 @@ function startScanners (url) {
         catch(err) {
             console.log("ContextMenu Call: ", err);
         }
-        
-
-		var lines = 1;
-		var linesUsed = $('#linesUsed');
-	
-		var hashLines = 4;
-		var hashLinesUsed = $('#hashLinesUsed');
-		
-		$('#fileHash-input').keydown(function(f) {
-//			$('#urlScanBtn').prop("disabled", true);
-			$('#max-info').hide();
-			document.getElementById('max-hashes').innerHTML = "Hash: ";
-			//document.getElementById('max-hashes').style.display = 'none';
-//			$('#file-submit').prop("disabled", false);
-			
-			document.getElementById('file-submit').style.cursor = 'pointer';
-			newLinesHash = $(this).val().split("\n").length;
-			hashLinesUsed.text(newLinesHash);
-			//console.log(linesUsed);
-
-			if(f.keyCode == 13 && newLinesHash >= hashLines) {
-				hashLinesUsed.css('color', 'red');
-				hashLinesUsed.append(" (Limit reached)");
-				return false;
-			}
-			else {
-				hashLinesUsed.css('color', '');
-			}
-		});
-		
-	$('#file-submit').click(function () {
-		var arrayOfHashes = $('#fileHash-input').val().split('\n');
-		//console.log(arrayOfHashes);
-		var fileHashes = "";
-		if (arrayOfHashes.length <= 4) {
-			//console.log("Valid input? Hashes: ");
-			
-			for (i = 0; i < arrayOfHashes.length; i++) {
-				if (i == 0) {
-					fileHashes = arrayOfHashes[i]; 
-				} else {
-					fileHashes += "\," + arrayOfHashes[i];	
-				}
-			}
-			console.log("fileHashes :", fileHashes);
-			console.log(arrayOfHashes.length);
-			if (arrayOfHashes.length != 0 && $('#fileHash-input').val() != "") {
-				try {
-					ga('send', 'event', 'File Scan', 'sumbit', 'File hash search submitted', {transport: 'beacon'});
-					$('#fileHash-input').prop('disabled',true);
-					$('#fileHash-input').css('cursor','not-allowed');
-					$('#file-submit').text("Scanning..");
-					$('#file-submit').prop("disabled", true);
-					$('#inputPane').css('cursor','wait');
-					
-                    $('#fileLookup .info').empty();
-                    $('#fileLookup .info').append( "<span class='glyphicon glyphicon-refresh-animate'></span> Please wait..</span>" );
-                    
-                    setTimeout(function() {
-                        vtFileReport(fileHashes);
-                    },1000);
-				}
-				
-				catch (err) {
-					console.log("Error(FileScan): ", err);
-				}
-				
-			} else {
-				$("#fileModal").modal("show");
-			}
-		} else {
-			//alert("You've exceeded the allowed limit of 4 file hashes search at a time!");
-		}
-	});
+        		
 		
         $('#searchBox').keypress(function(e) {
             if(e.which == 13) {

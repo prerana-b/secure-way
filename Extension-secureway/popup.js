@@ -22,11 +22,14 @@ function restore_options() {
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
+el = document.querySelector('#go-to-options')
 
-document.querySelector('#go-to-options').addEventListener('click', function() {
+if(el)
+{
+  el.addEventListener('click', function() {
   if (chrome.runtime.openOptionsPage) {
     chrome.runtime.openOptionsPage();
   } else {
     window.open(chrome.runtime.getURL('urlinfo.html'));
   }
-});
+})};
