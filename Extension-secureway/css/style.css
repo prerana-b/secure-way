@@ -1,43 +1,15 @@
-.wait {
-    cursor: wait;
- }
- 
- #avScannersList {
-     position: relative;
-     top: 40%;
- }
- 
- #menuBar {
-     position: fixed;
-     top: 0;
-     right: 0;
-     left: 0;
-     z-index: 1000;   
- }
+
  
  #scanReport {
      top: 60px;
  }
  
- #searchBox {
-     -webkit-transition: width 1s ease-in-out;
-     -moz-transition:width 1s ease-in-out;
-     -o-transition: width 1s ease-in-out;
-     transition: width 1s ease-in-out;
- }
- 
- .navbar {
-     border-radius: none;
- }
- 
- #searchBox:focus{
-     width: 300px;
- }
+
  
  #inputPane {
      position: absolute;
-     top: 24%;
-     left: 25%;
+     width: 500px;
+     left: 30%;
  }
  
    ul.nav-pills {
