@@ -1,0 +1,25 @@
+{
+    "manifest_version":2,
+    "name": "SecureWay",
+    "description":"Secure your browsing experience. Developed by group 5",
+    "author": "Group 5: Prerana Bhasein, Kishu Jain, Anushree Krishania, Mohd. Hamza, Sarthak Khabiya",
+
+    "version":"1.0",
+    "content_scripts": [
+        {
+          "matches": [
+            "<all_urls>"
+          ],
+          "js": ["jquery-3.1.1.min.js","content.js", "javascript/popup.js"]
+        }
+     ],
+     
+    "browser_action":{
+        "default_popup":"popup.html"
+    },
+    "permissions":[
+        "bookmarks", "tabs","storage", "*://*/*","contextMenus"
+    ],
+    "options_page": "urlinfo.html",
+    "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net; object-src 'self'"
+}
