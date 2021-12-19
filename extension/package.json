@@ -2,7 +2,7 @@
   "name": "extension",
   "version": "1.0.0",
   "description": "Secure extension for chrome",
-  "main": "popup.js",
+  "main": "content.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
