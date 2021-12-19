@@ -6,7 +6,7 @@ test('check for phishing', () => {
     })
 
 test("to check for illegal HTTPS ", () => {
-    testUrl = "https://www.sitepoint.com/understanding-module-exports-exports-node-js/"
+    testUrl = "dule-exports-exports-node-js/"
     expect(check.isIllegalHttpsURL(testUrl)).toBe(-1)
 })
 
