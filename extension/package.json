@@ -4,11 +4,29 @@
   "description": "Secure extension for chrome",
   "main": "content.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Group 5",
   "license": "ISC",
   "dependencies": {
+    "chromedriver": "^96.0.0",
+    "geckodriver": "^2.0.4",
+    "selenium-webdriver": "^4.1.0",
     "webdriverio": "^7.16.12"
-  }
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
+  "devDependencies": {
+    "jest": "^27.4.5",
+    "jest-webextension-mock": "^3.7.19"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prerana-b/secure-way.git"
+  },
+  "bugs": {
+    "url": "https://github.com/prerana-b/secure-way/issues"
+  },
+  "homepage": "https://github.com/prerana-b/secure-way#readme"
 }
