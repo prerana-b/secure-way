@@ -8,7 +8,10 @@ function predict(data,weight){
     for(var j=0;j<data.length;j++) {
       f += data[j] * weight[j];
     }
-    return f > 0 ? 1 : -1;
+    if (f>0){
+        alert("Warning: Phishing detected!!");
+        return 1;
+    }
 }
 var urltest = window.location.href;
 console.log(urltest);
@@ -296,12 +299,3 @@ function showPrediction() {
     console.log(prediction);
     return prediction;
 }
-
-exports.showPrediction = showPrediction;
-exports.isIllegalHttpsURL = isIllegalHttpsURL;
-
-//chrome.extension.sendRequest(prediction);
-
-
-
-
